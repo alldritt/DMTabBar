@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A58387C216921656001F6213 /* DMBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A58387C016921648001F6213 /* DMBar.m */; };
 		D9C42DB0158F85B700919C4A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9C42DAF158F85B700919C4A /* Cocoa.framework */; };
 		D9C42DBA158F85B700919C4A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D9C42DB8158F85B700919C4A /* InfoPlist.strings */; };
 		D9C42DBC158F85B700919C4A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C42DBB158F85B700919C4A /* main.m */; };
@@ -21,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A58387BF16921648001F6213 /* DMBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DMBar.h; sourceTree = "<group>"; };
+		A58387C016921648001F6213 /* DMBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DMBar.m; sourceTree = "<group>"; };
 		D9C42DAB158F85B700919C4A /* DMTabBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DMTabBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9C42DAF158F85B700919C4A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		D9C42DB2158F85B700919C4A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -117,6 +120,8 @@
 		D9C42DDA158FDDEC00919C4A /* DMTabBar Core Class */ = {
 			isa = PBXGroup;
 			children = (
+				A58387BF16921648001F6213 /* DMBar.h */,
+				A58387C016921648001F6213 /* DMBar.m */,
 				D9C42DCC158F85C200919C4A /* DMTabBar.h */,
 				D9C42DCD158F85C200919C4A /* DMTabBar.m */,
 				D9C42DCF158F88DA00919C4A /* DMTabBarItem.h */,
@@ -216,6 +221,7 @@
 				D9C42DC3158F85B700919C4A /* DMAppDelegate.m in Sources */,
 				D9C42DCE158F85C200919C4A /* DMTabBar.m in Sources */,
 				D9C42DD1158F88DA00919C4A /* DMTabBarItem.m in Sources */,
+				A58387C216921656001F6213 /* DMBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,6 +343,7 @@
 				D9C42DCB158F85B700919C4A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

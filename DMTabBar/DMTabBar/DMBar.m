@@ -19,7 +19,7 @@
 #define kDMBarBorderColor                                [NSColor colorWithDeviceWhite:0.2 alpha:1.0f]
 
 // Bar height
-#define kDMBarHeight                                     22
+#define kDMBarHeight                                     22.0
 
 @implementation DMBar
 
@@ -65,7 +65,7 @@
 }
 
 - (void) setFrame:(NSRect)frameRect {
-    frameRect.size.height = kDMBarHeight;
+    frameRect.size.height = kDMBarHeight;       // enforce a "standard" height for the bar
     [super setFrame:frameRect];
 }
 
