@@ -73,11 +73,8 @@
         }
     }];
     if (itemIndex == NSNotFound) return;
-    DMTabBarItem *tabBarItem = [self.tabBarItems objectAtIndex:itemIndex];
-    selectionHandler(DMTabBarItemSelectionType_WillSelect,tabBarItem,itemIndex);
     
-    self.selectedTabBarItem = tabBarItem;
-    selectionHandler(DMTabBarItemSelectionType_DidSelect,tabBarItem,itemIndex);
+    self.selectedTabBarItem = [self.tabBarItems objectAtIndex:itemIndex];
 }
 
 #pragma mark - Layout Subviews
@@ -126,7 +123,10 @@
 
 - (void) setSelectedTabBarItem:(DMTabBarItem *)newSelectedTabBarItem {
     if ([self.tabBarItems containsObject:newSelectedTabBarItem] == NO) return;
+    
     NSUInteger selectedItemIndex = [self.tabBarItems indexOfObject:newSelectedTabBarItem];
+
+    selectionHandler(DMTabBarItemSelectionType_WillSelect,newSelectedTabBarItem,selectedItemIndex);
     selectedTabBarItem_ = newSelectedTabBarItem;
     
     __block NSUInteger buttonIndex = 0;
@@ -134,6 +134,8 @@
         tabBarItem.state = (buttonIndex == selectedItemIndex ? NSOnState : NSOffState);
         ++buttonIndex;
     }];
+
+    selectionHandler(DMTabBarItemSelectionType_DidSelect,newSelectedTabBarItem,selectedItemIndex);
 }
 
 - (NSUInteger) selectedIndex {
