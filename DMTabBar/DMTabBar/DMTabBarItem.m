@@ -29,8 +29,7 @@ static CGFloat kDMTabBarItemGradientColor_Locations[] =     {0.0f, 0.5f, 1.0f};
 
 @implementation NSImage (DMTabBar)
 
-- (NSImage *)templateImageUsingTintColor:(NSColor *)tintColor
-{
+- (NSImage *)templateImageUsingTintColor:(NSColor *)tintColor {
     CGFloat shadowOffset = 1.0f;
     CGFloat imageWidth = self.size.width;
     CGFloat imageHeight = self.size.height;
@@ -41,8 +40,7 @@ static CGFloat kDMTabBarItemGradientColor_Locations[] =     {0.0f, 0.5f, 1.0f};
     CGFloat innerShadowBlurRadius = (imageWidth * scaleFactor) <= 16.0f ? 1.5f :
     3.0f;
     
-    CGImageSourceRef source = CGImageSourceCreateWithData((__bridge
-                                                           CFDataRef)[self TIFFRepresentation], NULL);
+    CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)[self TIFFRepresentation], NULL);
     CGImageRef sourceMask =  CGImageSourceCreateImageAtIndex(source, 0, NULL);
     CFRelease(source);
     CGColorSpaceRef colorSpace =
@@ -65,15 +63,13 @@ static CGFloat kDMTabBarItemGradientColor_Locations[] =     {0.0f, 0.5f, 1.0f};
     CGContextSaveGState(context);
     {
         CGColorRef shadowColorRef = CGColorGetConstantColor(kCGColorWhite);
-        CGColorRef alphaShadowColorRef =
-        CGColorCreateCopyWithAlpha(shadowColorRef, 0.2f);
-        CGContextSetShadowWithColor(context, CGSizeMake(0, dropShadowOffsetY),
-                                    0, alphaShadowColorRef);
+        CGColorRef alphaShadowColorRef = CGColorCreateCopyWithAlpha(shadowColorRef, 0.1f);
+        CGContextSetShadowWithColor(context, CGSizeMake(0, dropShadowOffsetY), 0, alphaShadowColorRef);
         CFRelease(alphaShadowColorRef);
         CGContextDrawImage(context, sourceRect, sourceMask);
     }
     CGContextRestoreGState(context);
-    
+
     // Fill the mask
     CGContextSaveGState(context);
     {
@@ -87,8 +83,7 @@ static CGFloat kDMTabBarItemGradientColor_Locations[] =     {0.0f, 0.5f, 1.0f};
                     alpha:&alphaComponent];
         
         CGContextClipToMask(context, sourceRect, sourceMask);
-        CGContextSetRGBFillColor(context, redComponent, greenComponent,
-                                 blueComponent, alphaComponent);
+        CGContextSetRGBFillColor(context, redComponent, greenComponent, blueComponent, alphaComponent);
         CGContextFillRect(context, sourceRect);
     }
     CGContextRestoreGState(context);
@@ -100,7 +95,7 @@ static CGFloat kDMTabBarItemGradientColor_Locations[] =     {0.0f, 0.5f, 1.0f};
         CGFloat startRed, startGreen, startBlue, startAlpha;
         CGFloat endRed, endGreen, endBlue, endAlpha;
         
-        [[NSColor colorWithSRGBRed:1.0f green:1.0f blue:1.0f alpha:0.1]
+        [[NSColor colorWithSRGBRed:1.0f green:1.0f blue:1.0f alpha:0.05]
          getRed:&endRed green:&endGreen blue:&endBlue alpha:&endAlpha];
         [[NSColor colorWithSRGBRed:1.0f green:1.0f blue:1.0f alpha:0.2]
          getRed:&startRed green:&startGreen blue:&startBlue alpha:&startAlpha];
@@ -110,29 +105,26 @@ static CGFloat kDMTabBarItemGradientColor_Locations[] =     {0.0f, 0.5f, 1.0f};
             endRed, endGreen, endBlue, endAlpha
         };
         
-        CGColorSpaceRef colorSpace =
-        CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
-        CGGradientRef gradient = CGGradientCreateWithColorComponents(colorSpace,
-                                                                     componnents, locations, 2);
+        CGColorSpaceRef colorSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
+        CGGradientRef gradient = CGGradientCreateWithColorComponents(colorSpace, componnents, locations, 2);
         CFRelease(colorSpace);
         CGPoint startPoint = CGPointMake(CGRectGetMidX(sourceRect),
                                          CGRectGetMinY(sourceRect));
         CGPoint endPoint = CGPointMake(CGRectGetMidX(sourceRect),
                                        CGRectGetMaxY(sourceRect));
-        CGContextDrawLinearGradient(context, gradient, startPoint, endPoint,
-                                    kCGGradientDrawsAfterEndLocation);
+        CGContextClipToMask(context, sourceRect, sourceMask);
+        CGContextDrawLinearGradient(context, gradient, startPoint, endPoint, kCGGradientDrawsAfterEndLocation);
         CFRelease(gradient);
     }
     CGContextRestoreGState(context);
-    
+
     //Draw inner shadow with inverted mask
     CGContextSaveGState(context);
     {
         CGColorRef shadowColorRef = CGColorGetConstantColor(kCGColorWhite);
         CGColorRef alphaShadowColorRef =
         CGColorCreateCopyWithAlpha(shadowColorRef, 0.6f);
-        CGContextSetShadowWithColor(context, CGSizeMake(0, -1),
-                                    innerShadowBlurRadius, alphaShadowColorRef);
+        CGContextSetShadowWithColor(context, CGSizeMake(0, -1), innerShadowBlurRadius, alphaShadowColorRef);
         CFRelease(alphaShadowColorRef);
         
         CGContextSetBlendMode(context, kCGBlendModeOverlay);
@@ -144,8 +136,7 @@ static CGFloat kDMTabBarItemGradientColor_Locations[] =     {0.0f, 0.5f, 1.0f};
     CFRelease(context);
     
     NSImage *retImage = [[NSImage alloc] initWithCGImage:retImageRef
-                                                    size:NSMakeSize(imageWidth,
-                                                                    imageHeight + shadowOffset)];
+                                                    size:NSMakeSize(imageWidth, imageHeight + shadowOffset)];
     
     CFRelease(retImageRef);
     CFRelease(sourceMask);
@@ -185,11 +176,7 @@ static CGFloat kDMTabBarItemGradientColor_Locations[] =     {0.0f, 0.5f, 1.0f};
 #if 1        
         //  Under Mavericks, you no longer get the blue icon tinting.  To work around this, we tint the image explicitly.
         tabBarItemButton.image = iconImage;
-        tabBarItemButton.alternateImage = [iconImage templateImageUsingTintColor:[NSColor blueColor]];
-        [tabBarItemButton.cell setShowsStateBy:NSContentsCellMask];
-#else
-        tabBarItemButton.image = [iconImage templateImageUsingTintColor:[NSColor redColor]];
-        tabBarItemButton.alternateImage = [iconImage templateImageUsingTintColor:[NSColor blueColor]];
+        tabBarItemButton.alternateImage = [iconImage templateImageUsingTintColor:[NSColor colorWithCalibratedRed:0.167 green:0.517 blue:1.000 alpha:1.000]];
         [tabBarItemButton.cell setShowsStateBy:NSContentsCellMask];
 #endif
         [tabBarItemButton setEnabled:YES];
