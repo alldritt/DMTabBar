@@ -126,7 +126,8 @@
     
     NSUInteger selectedItemIndex = [self.tabBarItems indexOfObject:newSelectedTabBarItem];
 
-    selectionHandler(DMTabBarItemSelectionType_WillSelect,newSelectedTabBarItem,selectedItemIndex);
+    if (selectionHandler)
+        selectionHandler(DMTabBarItemSelectionType_WillSelect,newSelectedTabBarItem,selectedItemIndex);
     selectedTabBarItem_ = newSelectedTabBarItem;
     
     __block NSUInteger buttonIndex = 0;
@@ -135,7 +136,8 @@
         ++buttonIndex;
     }];
 
-    selectionHandler(DMTabBarItemSelectionType_DidSelect,newSelectedTabBarItem,selectedItemIndex);
+    if (selectionHandler)
+        selectionHandler(DMTabBarItemSelectionType_DidSelect,newSelectedTabBarItem,selectedItemIndex);
 }
 
 - (NSUInteger) selectedIndex {
