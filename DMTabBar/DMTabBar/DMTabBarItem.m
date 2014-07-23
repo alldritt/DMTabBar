@@ -52,7 +52,7 @@ static CGFloat kDMTabBarItemGradientColor_Locations[] =     {0.0f, 0.5f, 1.0f};
                                                  8,
                                                  imageWidth * 4 * scaleFactor,
                                                  colorSpace,
-                                                 kCGImageAlphaPremultipliedFirst);
+                                                 (CGBitmapInfo) kCGImageAlphaPremultipliedFirst);
     
     CFRelease(colorSpace);
     CGContextSetShouldAntialias(context, YES);
