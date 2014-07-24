@@ -157,10 +157,6 @@ static CGFloat kDMTabBarItemGradientColor_Locations[] =     {0.0f, 0.5f, 1.0f};
 @implementation DMTabBarItem
 
 @synthesize enabled,icon,toolTip;
-<<<<<<< .mine
-//@synthesize keyEquivalent,keyEquivalentModifierMask;
-=======
->>>>>>> .r19
 @synthesize tag;
 @synthesize tabBarItemButton;
 @synthesize state;
