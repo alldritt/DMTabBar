@@ -261,7 +261,8 @@ static CGFloat kDMTabBarItemGradientColor_Locations[] =     {0.0f, 0.5f, 1.0f};
 }
 
 - (void) drawBezelWithFrame:(NSRect)frame inView:(NSView *)controlView {
-    if (self.state == NSOnState) { 
+#if 0
+    if (self.state == NSOnState) {
         // If selected we need to draw the border new background for selection (otherwise we will use default back color)
         // Save current context
         [[NSGraphicsContext currentContext] saveGraphicsState];
@@ -299,5 +300,6 @@ static CGFloat kDMTabBarItemGradientColor_Locations[] =     {0.0f, 0.5f, 1.0f};
         // Restore context
         [[NSGraphicsContext currentContext] restoreGraphicsState];
     }
+#endif
 }
 @end

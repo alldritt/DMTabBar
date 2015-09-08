@@ -16,10 +16,14 @@
 #define KDMBarGradient
 
 // Border color of the bar
+#if 0
 #define kDMBarBorderColor                                [NSColor colorWithDeviceWhite:0.2 alpha:1.0f]
+#else
+#define kDMBarBorderColor                                [NSColor colorWithDeviceWhite:0.5 alpha:1.0f]
+#endif
 
 // Bar height
-#define kDMBarHeight                                     22.0
+#define kDMBarHeight                                     29.0
 
 @implementation DMBar
 
@@ -50,9 +54,11 @@
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
+#if 0
     // Draw bar gradient
     [[[NSGradient alloc] initWithStartingColor:self.gradientColorStart endingColor:self.gradientColorEnd] drawInRect:self.bounds angle:90.0];
-    
+#endif
+   
     // Draw drak gray bottom border
     [_borderColor setStroke];
     [NSBezierPath setDefaultLineWidth:0.0f];
