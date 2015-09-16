@@ -27,27 +27,22 @@
 
 @implementation DMBar
 
-- (id)initWithFrame:(NSRect)frameRect
-{
-    if (self = [super initWithFrame:frameRect])
-    {
+- (id)initWithFrame:(NSRect)frameRect {
+    if ((self = [super initWithFrame:frameRect])) {
         [self setDefaultColors];
     }
     
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    if (self = [super initWithCoder:aDecoder])
-    {
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if ((self = [super initWithCoder:aDecoder])) {
         [self setDefaultColors];
     }
     return self;
 }
 
-- (void)setDefaultColors
-{
+- (void)setDefaultColors {
     self.gradientColorStart = kDMBarGradientColor_Start;
     self.gradientColorEnd = kDMBarGradientColor_End;
     self.borderColor = kDMBarBorderColor;
